@@ -1,6 +1,6 @@
 from customtkinter import *
 from tkinter import ttk
-
+import sqlite3
 
 janela = CTk()
 
@@ -10,6 +10,30 @@ class Funcs():
         self.entr_nome.delete(0, END)
         self.entr_tel.delete(0, END)
         self.entr_cidade.delete(0, END)
+    def conecta_bd(self):
+        self.conn = sqlite3.connect("clientes.bd")
+        self.cursor = self.conn.cursor(); print("Conectando ao Banco de Dados...")
+
+    def desconecta_bd(self):
+        self.conn.close(); print("Banco de Dados desconectado...")
+    
+    def monta_tabelas(self):
+        self.conecta_bd();
+        ### criando tabela
+        self.cursor.execute("""
+            CREATE TABLE IF NOT EXISTS clientes (
+                cod INTEGER PRIMARY KEY,
+                nome_cliente VARCHAR (40) NOT NULL,
+                telefone INTEGER (11),
+                cidade VARCHAR (20)
+            
+        );""")
+        self.conn.commit(); print("Banco de Dados criado!")
+        self.desconecta_bd()
+
+
+
+
 
 
 class Aplication(Funcs):
@@ -19,6 +43,7 @@ class Aplication(Funcs):
         self.frames_Da_tela()     # chama os frames
         self.widgets_frame1()
         self.lista_frame2()
+        self.monta_tabelas()
         janela.mainloop()          # mantem  a janela aberta
 
     def tela(self):
