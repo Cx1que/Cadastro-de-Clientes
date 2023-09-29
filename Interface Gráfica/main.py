@@ -34,25 +34,6 @@ class Funcs():
         self.nome = self.entr_nome.get()
         self.tel = self.entr_tel.get()
         self.cidade = self.entr_cidade.get()
-    def add_cliente(self):
-        self.variaveis()
-        self.conecta_bd()
-
-        self.cursor.execute("""INSERT INTO clientes (nome_cliente, telefone, cidade)
-                VALUES 
-                (?, ?, ?)""", (self.nome, self.tel, self.cidade))
-        self.conn.commit()
-        self.desconecta_bd()
-        self.select_lista()
-        self.limpa_tela()
-    def select_lista(self):
-        self.lista_cli.delete(*self.lista_cli.get_children())
-        self.conecta_bd()
-        lista = self.cursor.execute("""SELECT cod, nome_cliente, telefone, cidade FROM clientes
-                                    ORDER BY nome_cliente ASC; """)
-        for i in lista:
-            self.lista_cli.insert("", END, values=i)
-        self.desconecta_bd()
     def duplo_click(self, event):
         self.limpa_tela()
         self.lista_cli.selection()
@@ -63,14 +44,18 @@ class Funcs():
             self.entr_nome.insert(END, col2)
             self.entr_tel.insert(END, col3)
             self.entr_cidade.insert(END, col4)
-    def deleta_cliente(self):
+
+
+    def add_cliente(self):
         self.variaveis()
         self.conecta_bd()
-        self.cursor.execute("""DELETE FROM clientes WHERE cod = ? ;""", [self.codigo])
-        self.conn.commit() 
+
+        self.cursor.execute("""INSERT INTO clientes (nome_cliente, telefone, cidade)
+                            VALUES (?, ?, ?)""", (self.nome, self.tel, self.cidade))
+        self.conn.commit()
         self.desconecta_bd()
-        self.limpa_tela()
         self.select_lista()
+        self.limpa_tela
     def altera_cliente(self):
         self.variaveis()
         self.conecta_bd()
@@ -79,7 +64,41 @@ class Funcs():
         self.conn.commit()
         self.desconecta_bd()
         self.select_lista()
-        self.limpa_tela
+        self.limpa_tela()
+
+    
+    def deleta_cliente(self):
+        self.variaveis()
+        self.conecta_bd()
+        self.cursor.execute("""DELETE FROM clientes WHERE cod = ? ;""", [self.codigo])
+        self.conn.commit() 
+        self.desconecta_bd()
+        self.limpa_tela()
+        self.select_lista()
+    
+    def select_lista(self):
+        self.lista_cli.delete(*self.lista_cli.get_children())
+        self.conecta_bd()
+        lista = self.cursor.execute("""SELECT cod, nome_cliente, telefone, cidade FROM clientes
+                                    ORDER BY nome_cliente ASC; """)
+        for i in lista:
+            self.lista_cli.insert("", END, values=i)
+        self.desconecta_bd()
+    def buscar_cliente(self):
+        self.conecta_bd()
+        self.lista_cli.delete(*self.lista_cli.get_children())
+
+        self.entr_nome.insert(END, '%')
+        nome = self.entr_nome.get()
+        self.cursor.execute(""" SELECT cod, nome_cliente, telefone, cidade FROM clientes
+                            WHERE nome_cliente LIKE '%s' ORDER BY nome_cliente ASC""" % nome)
+        buscar_nome_cli = self.cursor.fetchall()
+        for i in buscar_nome_cli:
+            self.lista_cli.insert("", END, values=i)
+        self.limpa_tela()
+        self.desconecta_bd()
+        
+    
 
 
 class Aplication(Funcs):
@@ -117,7 +136,7 @@ class Aplication(Funcs):
         self.bt_limpar = CTkButton(self.frame_1, text= 'Limpar', border_width= 2, bg_color='transparent', border_color='#0C1821', fg_color= '#324A5F', text_color= 'white', font= ('poppins', 11, 'bold'), command=self.limpa_tela)
         self.bt_limpar.place(relx= 0.2, rely= 0.1, relwidth= 0.1, relheight= 0.15)
         ### botao Buscar
-        self.bt_buscar = CTkButton(self.frame_1, text= 'Buscar', border_width= 2, bg_color='transparent',border_color='#0C1821', fg_color= '#324A5F', text_color= 'white', font= ('poppins', 11, 'bold'))
+        self.bt_buscar = CTkButton(self.frame_1, text= 'Buscar', border_width= 2, bg_color='transparent',border_color='#0C1821', fg_color= '#324A5F', text_color= 'white', font= ('poppins', 11, 'bold'), command= self.buscar_cliente)
         self.bt_buscar.place(relx= 0.31, rely= 0.1, relwidth= 0.1, relheight= 0.15)
         ### botao novo
         self.bt_novo = CTkButton(self.frame_1, text= 'Novo', border_width= 2, bg_color='transparent',border_color='#0C1821', fg_color= '#324A5F', text_color= 'white', font= ('poppins', 11, 'bold'), command= self.add_cliente)
