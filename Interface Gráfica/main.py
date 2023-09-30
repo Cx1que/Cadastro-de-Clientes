@@ -19,7 +19,7 @@ class Funcs():
     def monta_tabelas(self):
         self.conecta_bd();
         ### criando tabela
-        self.cursor.execute(""" 
+        self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS clientes (
                 cod INTEGER PRIMARY KEY,
                 nome_cliente VARCHAR (40) NOT NULL,
@@ -136,7 +136,8 @@ class Aplication(Funcs):
         self.bt_limpar = CTkButton(self.frame_1, text= 'Limpar', border_width= 2, bg_color='transparent', border_color='#0C1821', fg_color= '#324A5F', text_color= 'white', font= ('poppins', 11, 'bold'), command=self.limpa_tela)
         self.bt_limpar.place(relx= 0.2, rely= 0.1, relwidth= 0.1, relheight= 0.15)
         ### botao Buscar
-        self.bt_buscar = CTkButton(self.frame_1, text= 'Buscar', border_width= 2, bg_color='transparent',border_color='#0C1821', fg_color= '#324A5F', text_color= 'white', font= ('poppins', 11, 'bold'), command= self.buscar_cliente)
+        self.bt_buscar = CTkButton(self.frame_1, text= 'Buscar', border_width= 2, bg_color='transparent',border_color='#0C1821', fg_color= '#324A5F', text_color= 'white', font= ('poppins', 11, 'bold'), command= 
+                                   self.buscar_cliente)
         self.bt_buscar.place(relx= 0.31, rely= 0.1, relwidth= 0.1, relheight= 0.15)
         ### botao novo
         self.bt_novo = CTkButton(self.frame_1, text= 'Novo', border_width= 2, bg_color='transparent',border_color='#0C1821', fg_color= '#324A5F', text_color= 'white', font= ('poppins', 11, 'bold'), command= self.add_cliente)
