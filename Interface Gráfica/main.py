@@ -133,51 +133,39 @@ class Aplication(Funcs):
 
     def widgets_frame1(self):
         ### botao limpar
-        self.bt_limpar = CTkButton(self.frame_1, text= 'Limpar', border_width= 2, bg_color='transparent', border_color='#0C1821', fg_color= '#324A5F', text_color= 'white', font= ('poppins', 11, 'bold'), command=self.limpa_tela)
-        self.bt_limpar.place(relx= 0.2, rely= 0.1, relwidth= 0.1, relheight= 0.15)
+        self.bt_limpar = CTkButton(self.frame_1, text= 'Limpar', border_width= 2, corner_radius= 8,bg_color='transparent', border_color='#0C1821', fg_color= '#324A5F', text_color= 'white', font= ('poppins', 11, 'bold'), command=self.limpa_tela)
+        self.bt_limpar.place(relx= 0.055, rely= 0.7, relwidth= 0.1, relheight= 0.15)
         ### botao Buscar
-        self.bt_buscar = CTkButton(self.frame_1, text= 'Buscar', border_width= 2, bg_color='transparent',border_color='#0C1821', fg_color= '#324A5F', text_color= 'white', font= ('poppins', 11, 'bold'), command= 
-                                   self.buscar_cliente)
-        self.bt_buscar.place(relx= 0.31, rely= 0.1, relwidth= 0.1, relheight= 0.15)
-        ### botao novo
-        self.bt_novo = CTkButton(self.frame_1, text= 'Novo', border_width= 2, bg_color='transparent',border_color='#0C1821', fg_color= '#324A5F', text_color= 'white', font= ('poppins', 11, 'bold'), command= self.add_cliente)
-        self.bt_novo.place(relx= 0.61, rely= 0.1, relwidth= 0.1, relheight= 0.15)
+        self.bt_buscar = CTkButton(self.frame_1, text= 'Buscar', border_width= 2, corner_radius= 8, bg_color='transparent',border_color='#0C1821', fg_color= '#324A5F', text_color= 'white', font= ('poppins', 11, 'bold'), command= self.buscar_cliente)
+        self.bt_buscar.place(relx= 0.6, rely= 0.1, relwidth= 0.1, relheight= 0.15)
+        ### botao salvar
+        self.bt_salvar = CTkButton(self.frame_1, text= 'Salvar', border_width= 2, corner_radius= 8, bg_color='transparent',border_color='#0C1821', fg_color= '#324A5F', text_color= 'white', font= ('poppins', 11, 'bold'), command= self.add_cliente)
+        self.bt_salvar.place(relx= 0.352, rely= 0.7, relwidth= 0.1, relheight= 0.15)
         ### botao alterar
-        self.bt_alterar = CTkButton(self.frame_1, text= 'Alterar', border_width= 2, bg_color='transparent',border_color='#0C1821', fg_color= '#324A5F', text_color= 'white', font= ('poppins', 11, 'bold'), command= self.altera_cliente)
+        self.bt_alterar = CTkButton(self.frame_1, text= 'Alterar', border_width= 2, corner_radius= 8,       bg_color='transparent',border_color='#0C1821', fg_color= '#324A5F', text_color= 'white', font= ('poppins', 11, 'bold'), command= self.altera_cliente)
         self.bt_alterar.place(relx= 0.71, rely= 0.1, relwidth= 0.1, relheight= 0.15)
         ### botao apagar
-        self.bt_apagar = CTkButton(self.frame_1, text= 'Apagar',border_width= 2, bg_color='transparent',border_color='#0C1821', fg_color= '#324A5F', text_color= 'white', font= ('poppins', 11, 'bold'), command=self.deleta_cliente)
-        self.bt_apagar.place(relx= 0.81, rely= 0.1, relwidth= 0.1, relheight= 0.15)
+        self.bt_apagar = CTkButton(self.frame_1, text= 'Apagar',border_width= 2, corner_radius= 8, bg_color='transparent',border_color='#0C1821', fg_color= '#324A5F', text_color= 'white', font= ('poppins', 11, 'bold'), command=self.deleta_cliente)
+        self.bt_apagar.place(relx= 0.82, rely= 0.1, relwidth= 0.1, relheight= 0.15)
 
 
 
-        ### label e entrada do código
-        self.lb_codigo = CTkLabel(self.frame_1, text='Código', fg_color= '#1B2A41', text_color= 'white', font= ('poppins', 11, 'bold'))
-        self.lb_codigo.place(relx= 0.05, rely= 0.02)
-
-        self.entr_codigo = CTkEntry(self.frame_1, fg_color='white', text_color='black', border_color='#C5C5C5')
+        self.entr_codigo = CTkEntry(self.frame_1, fg_color='white', text_color='black', border_color='#C5C5C5', placeholder_text= 'Código', font= ('poppins', 12, 'bold'))
         self.entr_codigo.place(relx= 0.05, rely= 0.12,relwidth= 0.1)
 
-        ### label e entrada do nome
-        self.lb_nome = CTkLabel(self.frame_1, text='Nome', fg_color= '#1B2A41', text_color= 'white', font= ('poppins', 11, 'bold'))
-        self.lb_nome.place(relx= 0.05, rely= 0.35)
+        
 
-        self.entr_nome = CTkEntry(self.frame_1, fg_color='white', text_color='black', border_color='#C5C5C5')
-        self.entr_nome.place(relx= 0.05, rely= 0.45,relwidth= 0.45)
+        self.entr_nome = CTkEntry(self.frame_1, fg_color='white', text_color='black', border_color='#C5C5C5', placeholder_text= 'Nome', font= ('poppins', 12, 'bold'))
+        self.entr_nome.place(relx= 0.05, rely= 0.32,relwidth= 0.4)
 
-        ### label e entrada do telefone
-        self.lb_tel = CTkLabel(self.frame_1, text='Telefone', fg_color= '#1B2A41', text_color= 'white', font= ('poppins', 11, 'bold'))
-        self.lb_tel.place(relx= 0.05, rely= 0.6)
+        
+        self.entr_tel = CTkEntry(self.frame_1, fg_color='white', text_color='black', border_color='#C5C5C5', placeholder_text= 'Telefone', font= ('poppins', 12, 'bold'))
+        self.entr_tel.place(relx= 0.05, rely= 0.5,relwidth= 0.2)
 
-        self.entr_tel = CTkEntry(self.frame_1, fg_color='white', text_color='black', border_color='#C5C5C5')
-        self.entr_tel.place(relx= 0.05, rely= 0.7,relwidth= 0.2)
 
-        ### label e entrada da cidade
-        self.lb_cidade = CTkLabel(self.frame_1, text='Cidade', fg_color= '#1B2A41', text_color= 'white', font= ('poppins', 11, 'bold'))
-        self.lb_cidade.place(relx= 0.3, rely= 0.6)
+        self.entr_cidade = CTkEntry(self.frame_1, fg_color='white', text_color='black', border_color='#C5C5C5', placeholder_text= 'Cidade', font= ('poppins', 12, 'bold'))
+        self.entr_cidade.place(relx= 0.27, rely= 0.5,relwidth= 0.181)
 
-        self.entr_cidade = CTkEntry(self.frame_1, fg_color='white', text_color='black', border_color='#C5C5C5')
-        self.entr_cidade.place(relx= 0.3, rely= 0.7,relwidth= 0.2)
     
     def lista_frame2(self):
         self.lista_cli = ttk.Treeview(self.frame_2, height= 3, column=('col1', 'col2', 'col3', 'col4'))
